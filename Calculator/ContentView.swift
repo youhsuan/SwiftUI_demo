@@ -10,19 +10,60 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("qwert")
-            .font(.custom("Copperplate", size: 48))
-            .foregroundColor(.white)
-            .background(Color.black)
-            .padding()
-            .background(Color.blue)
-            .padding()
-            .background(Color.orange)
+        HStack{
+            CalculatorButton(title: "1",
+                             size: CGSize(width: 88, height: 88),
+                             backgroundColor: Color.orange,
+                             action:{ print("Button: 1")})
+            
+            CalculatorButton(title: "2",
+                             size: CGSize(width: 88, height: 88),
+            
+                             backgroundColor: Color.orange,
+            
+                             action: {print("Button: 2")})
+            
+            CalculatorButton(title: "3",
+            
+                             size: CGSize(width: 88, height: 88),
+            
+                             backgroundColor: Color.orange,
+            
+                             action: {print("Button: 3")})
+            
+            CalculatorButton(title: "+",
+            
+                             size: CGSize(width: 88, height: 88),
+            
+                             backgroundColor: Color.black,
+            
+                             action: {print("Button: +")})
+            
+        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+
+struct CalculatorButton: View {
+    let fontSize: CGFloat = 38
+    let title: String
+    let size: CGSize
+    let backgroundColor: Color
+    let action: () -> Void
+    
+    var body: some View {
+        Button(action: action) {
+            Text(title)
+                .font(.system(size: fontSize))
+                .foregroundColor(.white)
+                .frame(width: 88, height: 88)
+                .background(backgroundColor)
+                .cornerRadius(size.width / 2)
+        }
     }
 }
