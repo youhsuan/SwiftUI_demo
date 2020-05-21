@@ -9,36 +9,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    let row: [CalculatorButtonItem] = [
+    .digit(1), .digit(2), .digit(3), .op(.plus),
+    ]
+    
     var body: some View {
         HStack{
-            CalculatorButton(title: "1",
-                             size: CGSize(width: 88, height: 88),
-                             backgroundColor: Color.orange,
-                             action:{ print("Button: 1")})
-            
-            CalculatorButton(title: "2",
-                             size: CGSize(width: 88, height: 88),
-            
-                             backgroundColor: Color.orange,
-            
-                             action: {print("Button: 2")})
-            
-            CalculatorButton(title: "3",
-            
-                             size: CGSize(width: 88, height: 88),
-            
-                             backgroundColor: Color.orange,
-            
-                             action: {print("Button: 3")})
-            
-            CalculatorButton(title: "+",
-            
-                             size: CGSize(width: 88, height: 88),
-            
-                             backgroundColor: Color.black,
-            
-                             action: {print("Button: +")})
-            
+            ForEach(row, id: \.self) { item in
+                CalculatorButton(title: item.title,
+                                 size: item.size,
+                                 backgroundColor: item.backgroundColor,
+                                 action:{ print(item.title)})
+            }
         }
     }
 }
@@ -61,9 +43,49 @@ struct CalculatorButton: View {
             Text(title)
                 .font(.system(size: fontSize))
                 .foregroundColor(.white)
-                .frame(width: 88, height: 88)
+                .frame(width: size.width, height: size.height)
                 .background(backgroundColor)
                 .cornerRadius(size.width / 2)
+        }
+    }
+}
+
+enum CalculatorButtonItem {
+    enum Op: String {
+        case plus = "+"
+        case minus = "-"
+        case divide = "÷"
+        case multiply = "×"
+        case equal = "="
+    }
+    enum Command: String {
+        case clear = "AC"
+        case flip = "+/-"
+        case percent = "%"
+    }
+    case digit(Int)
+    case dot
+    case op(Op)
+    case command(Command)
+}
+
+extension CalculatorButtonItem: Hashable {
+    var title: String {
+        switch self {
+        case .digit(let value): return String(value)
+        case .dot: return "."
+        case .op(let op): return op.rawValue
+        case .command(let command): return command.rawValue
+        }
+    }
+    var size: CGSize {
+        CGSize(width: 88, height: 88)
+    }
+    var backgroundColor: Color {
+        switch self {
+        case .digit, .dot: return Color.orange
+        case .op: return Color.black
+        case .command: return Color.black
         }
     }
 }
