@@ -40,16 +40,28 @@ struct CalculatorButtonPad: View {
 
 struct ContentView: View {
     var body: some View {
-        VStack(alignment: .trailing, spacing: 12) {
-            Text("0").font(.system(size: 76))
+        VStack(spacing: 12) {
+            Spacer()
+            Text("112222222211220")
+                .font(.system(size: 76))
+                .minimumScaleFactor(0.5)
+                .padding(.trailing, 24)
+                .lineLimit(1)
+                .frame(minWidth: 0,
+                       maxWidth: .infinity,
+                       alignment: .trailing)
             CalculatorButtonPad()
+                .padding(.bottom)
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        Group{
+            ContentView()
+            ContentView().previewDevice("iPhone SE")
+        }
     }
 }
 
@@ -108,9 +120,9 @@ extension CalculatorButtonItem: Hashable {
     }
     var backgroundColor: Color {
         switch self {
-        case .digit, .dot: return Color.orange
-        case .op: return Color.black
-        case .command: return Color.black
+        case .digit, .dot: return Color.black
+        case .op: return Color.orange
+        case .command: return Color.gray
         }
     }
 }
