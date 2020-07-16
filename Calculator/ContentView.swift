@@ -62,6 +62,8 @@ struct ContentView_Previews: PreviewProvider {
             ContentView()
             ContentView().previewDevice("iPhone SE")
         }
+        
+        
     }
     
     
