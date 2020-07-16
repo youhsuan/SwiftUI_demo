@@ -63,6 +63,8 @@ struct ContentView_Previews: PreviewProvider {
             ContentView().previewDevice("iPhone SE")
         }
     }
+    
+    
 }
 
 struct CalculatorButton: View {
