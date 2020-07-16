@@ -129,5 +129,3 @@ extension CalculatorButtonItem: Hashable {
         }
     }
 }
-
-
